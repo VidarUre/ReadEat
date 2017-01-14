@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style='background-color: #F0E68C;'>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+          <button type="button", class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/recipes">Read&Eat</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <% if current_user %>
+            <li><%= link_to "My Recipes", myrecipes_path %></li>
+            <li><a href="#">Favorites</a></li>
+          <% else %>
+            <li><%= link_to "Login", 'login' %></li>
+            <li><%= link_to "Register", 'signup' %></li>
+          <% end %>
+              <li><%= link_to "About", '/about' %></li>
+          <% if current_user %>
+              <li><%= link_to "Log Out", logout_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row row-centered">
+
+      <h1>Sign Up</h1>
+
+      <div class="well">
+        <div class="form-group">
+          <%= form_for(@user) do |f| %>
+            <label for="FirstNameInput">First name</label></br>
+            <%= f.text_field :first_name, :placeholder => "First name", class: "form-control" %></br>
+            <label for="LastNameInput">Last name</label></br>
+            <%= f.text_field :last_name, :placeholder => "Last name", class: "form-control" %></br>
+            <label for="EmailInput">Email</label></br>
+            <%= f.email_field :email, :placeholder => "Email", class: "form-control" %></br>
+            <label for="PasswordInput">Password</label></br>
+            <%= f.password_field :password, :placeholder => "Password", class: "form-control" %></br>
+            <%= f.submit "Create an account", class: "btn btn-default" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="bg-danger">
+        <%= @error %>
+      </div>
+
+      <div class="alreadyregistered">
+        Already have an account?
+        <%= link_to "Log in", 'login' %>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
